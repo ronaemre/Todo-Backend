@@ -18,7 +18,6 @@ func newAPI(service *Service) API {
 func (api *API) GetTodosHandler(c *fiber.Ctx) error {
 
 	todos, err := api.service.GetTodos()
-
 	switch err {
 	case nil:
 		c.JSON(todos)

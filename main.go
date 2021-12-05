@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	repository := NewTestRepository() //databse bağla
+	repository := NewRepository() //databse bağla
 	service := NewService(repository)
 	api := newAPI(&service)
 	app := SetupApp(&api)

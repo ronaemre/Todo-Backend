@@ -111,6 +111,21 @@ func (repository *Repository) DeleteTodo(todoId string) error {
 
 }
 
+func NewRepository() *Repository {
+	uri := "mongodb+srv://rona:rona123@clustertodo.emo1b.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-frb3e6-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"
+	client, err := mongo.NewClient(options.Client().ApplyURI(uri))
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+	defer cancel()
+	client.Connect(ctx)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return &Repository{client}
+}
+
 func NewTestRepository() *Repository { //mongo localae bağlama test için
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
